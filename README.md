@@ -1,6 +1,6 @@
 # blog
 
-偶尔写写博客
+偶尔写写。
 
 ## 文章列表
 
@@ -10,3 +10,4 @@
 - [说说如何实现一个模板引擎](https://github.com/whxaxes/blog/issues/4)
 - [仿造slither.io第二步：加个地图，加点吃的](https://github.com/whxaxes/blog/issues/2)
 - [仿造slither.io第一步：先画条蛇](https://github.com/whxaxes/blog/issues/1)
+- [更多](http://www.cnblogs.com/axes/)
