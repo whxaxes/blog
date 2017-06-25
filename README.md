@@ -1,10 +1,8 @@
 # blog
 
-偶尔写写博客，会渐渐把博客园的博客同步到github
+偶尔写写博客
 
-博客园地址：[http://www.cnblogs.com/axes/](http://www.cnblogs.com/axes/)
-
-## 博客列表
+## 文章列表
 
 - [解读 Vue 之 Reactive](https://github.com/whxaxes/blog/issues/7)
 - [解读 Vue 之 $mount 方法](https://github.com/whxaxes/blog/issues/6)
