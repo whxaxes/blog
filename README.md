@@ -4,6 +4,7 @@
 
 ## 文章列表
 
+- [使用 electron 做个播放器](https://github.com/whxaxes/blog/issues/8)
 - [解读 Vue 之 Reactive](https://github.com/whxaxes/blog/issues/7)
 - [解读 Vue 之 $mount 方法](https://github.com/whxaxes/blog/issues/6)
 - [说说如何实现一个模板引擎二：优化](https://github.com/whxaxes/blog/issues/5)
