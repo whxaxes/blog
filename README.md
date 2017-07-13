@@ -2,6 +2,8 @@
 
 偶尔写写。若有不当，欢迎指出，但请勿喷
 
+订阅请 watch，不用 star 也不用 fork
+
 ## 文章列表
 
 - [使用 electron 做个播放器](https://github.com/whxaxes/blog/issues/8)
