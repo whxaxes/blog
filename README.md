@@ -6,6 +6,7 @@
 
 ## 文章列表
 
+- [Node Inspector 代理实现](https://github.com/whxaxes/blog/issues/9)
 - [使用 electron 做个播放器](https://github.com/whxaxes/blog/issues/8)
 - [解读 Vue 之 Reactive](https://github.com/whxaxes/blog/issues/7)
 - [解读 Vue 之 $mount 方法](https://github.com/whxaxes/blog/issues/6)
