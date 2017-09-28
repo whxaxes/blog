@@ -5,7 +5,9 @@
 简单先说明一下 jscodeshift 能用来干嘛，其实就是能够解析 js ，将 js 内容解析成 AST 语法树，然后提供一些便利的操作接口，方便我们对各个节点进行更改，比如更改所有的属性名之类的。比如这个官方提供的最简单的 demo：
 
 ```js
-require('jscodeshift')(jsContent)
+const j = require('jscodeshift');
+
+j(jsContent)
     .find(j.Identifier)
     .replaceWith(
       p => j.identifier(p.node.name.split('').reverse().join(''))
