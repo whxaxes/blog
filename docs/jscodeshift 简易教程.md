@@ -1,3 +1,5 @@
+# jscodeshift 简易教程
+
 ## 背景
 
 [jscodeshift](https://github.com/facebook/jscodeshift) 是 fb 出的一个 codemod toolkit，基于 [recast](https://github.com/benjamn/recast) 这个 js 解析器封装了很多方便使用的工具方法。但是由于官网对使用方式的描述有点谜，刚用起来会有点蛋疼，所以写篇教程说一下。

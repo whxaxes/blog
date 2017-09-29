@@ -1,7 +1,5 @@
 # Node Inspector 代理实现
 
-# Node Inspector 代理实现
-
 ## 背景
 
 平时做 node 开发的时候，通过 node inspector 来进行断点调试是一个很常用的 debug 方式。但是在使用中的时候，发现有让我们调试的没那么爽的问题。
