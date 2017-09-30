@@ -10,7 +10,6 @@
 
 而把上面的两个问题简化一下就是：
 
-
 - 在 vscode 中调试，在 inspector 端口变更或者 websocket id 变更后能够重连。
 - 在 devtools 中调试，在 inspector 端口变更或者 websocket id 变更后能够重连。
 
