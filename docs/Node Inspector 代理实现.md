@@ -8,7 +8,7 @@
 
 问题二：当使用 devtools 调试的时候，每次调试都需要拷贝 devtools 链接到 chrome 上调试，而上面说的端口变更问题则会导致 devtools 的链接变更，除此之外，每次重新启动 inspector 也会导致 devtools 的链接变更，因为 websocket id 变了。
 
-因此，如果我们想要愉快的调试，就得解决以下两个问题：
+而把上面的两个问题简化一下就是：
 
 - 在 vscode 中调试，在 inspector 端口变更或者 websocket id 变更后能够重连。
 - 在 devtools 中调试，在 inspector 端口变更或者 websocket id 变更后能够重连。
