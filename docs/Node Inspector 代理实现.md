@@ -4,7 +4,7 @@
 
 平时做 node 开发的时候，通过 node inspector 来进行断点调试是一个很常用的 debug 方式。但是有几个问题会导致我们的调试效率降低。
 
-其中一个问题是，当我在用 vscode 进行断点调试时，如果我的应用是通过 cluster 启动的 inspector，那么每次当 worker 挂了重启后，inspector 的端口都会自增。虽然在 node8.x 版本中可以指定 inspectPort 固定调试端口，但是在 node6.x 中是不支持的。这样会导致每次 worker 重启了就得在 vscode 中重新指定调试端口。
+其中一个问题是，当我在用 vscode 进行断点调试的时候，如果我的应用是通过 cluster 启动的 inspector，那么每次当 worker 挂了重启后，inspector 的端口都会自增。虽然在 node8.x 版本中可以指定 inspectPort 固定调试端口，但是在 node6.x 中是不支持的。这样会导致每次 worker 重启了就得在 vscode 中重新指定调试端口。
 
 而对于使用 devtools 调试的同学就更蛋疼了，因为使用 devtools 调试都需要拷贝 devtools 链接到 chrome 上调试，而上面说的端口变更问题则会导致 devtools 的链接变更，除此之外，每次重新启动 inspector 也会导致 devtools 的链接变更，因为 websocket id 变了。
 
