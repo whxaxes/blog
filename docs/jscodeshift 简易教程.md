@@ -34,7 +34,9 @@ elosnoc.gol('123')
 
 ## 使用
 
-在具体说 jscodeshift 如何使用之前，有个网站是必须得配合使用的，就是 jscodeshift 提供的一个 ast 可视化工具 [AST explorer](http://astexplorer.net/)。
+### 配套工具
+
+在具体说 jscodeshift 如何使用之前，有个网站是必须得配合使用的，就是 jscodeshift 提供的一个配套的 ast 可视化工具 [AST explorer](http://astexplorer.net/)。
 
 基本上使用 jscodeshift 都要配合这个站点上可视化的 ast tree 来实现。
 
@@ -62,9 +64,11 @@ app.say('123')
 
 可以看到上面那串代码被转换成了这么一种树形结构，其中 ExpressionStatement 代表的是表达式模块，也就是 app.get 整个串代码，而其中的 MemberExpression 代表的是 `app.get`，arguments 代表的是后面的方法参数那串，然后按顺序，Literal 就是 `'/api/config/save'`，Identifier 就是 `checkConfigHighRiskPermission`，然后 FunctionExpression 就是最后的那个方法。
 
-那么，如果我需要把上面代码中的 `app.get...` 的那段代码，把里面的 app.get 换成 app.post，并且把 app.get 中的那个回调方法，换成一个 generator 该怎么换？
+那么，如果我需要把上面代码中的 `app.get...` 的那段代码，把里面的 app.get 换成 app.post，并且把 app.get 中的那个回调方法，换成一个 generator 该怎么换？下面就介绍如何增删改查。
 
-首先，我们需要通过 find 方法查找到 app.get 这串代码的节点，而查找方式就是按照 ast explorer 中的结构来查找
+### 查
+
+jscodeshift 提供了方便的 find 方法供我们快速查找到我们需要处理的节点，而查找方式就是按照 ast explorer 中的结构来查找
 
 ```js
 const ast = j(jsContent).find(j.CallExpression, {
@@ -80,6 +84,8 @@ const ast = j(jsContent).find(j.CallExpression, {
 ```
 
 通过 find 方法，查找所有的 CallExpression，然后传入查询条件，查询条件其实就是 CallExpression 中的 json 结构，所以传入 callee.object.name 为 app，然后传入 callee.property.name 为 get，找到的 path 就是我们要的 path 了。
+
+### 改
 
 找到我们需要的 CallExpression 之后，先替换 app.get 为 app.post，直接接着上面的代码写：
 
@@ -152,7 +158,9 @@ ast.find(j.FunctionExpression)
   	})
 ```
 
-上面说的都是 replaceWith，也就是替换节点。如果我们想要插入一个节点，比如也是上面的 app.get 中，我想在后面的回调中再插入一个回调。就可以直接用 insertAfter：
+### 增
+
+如果要增加节点的话 jscodeshift 也提供了两个方法，分别是 insertAfter 和 insertBefore，看方法名就可以知道，这两个方法分别是用于插前面，还是插后面。比如也是上面的 app.get 中，我想在后面的回调中再插入一个回调。就可以直接用 insertAfter：
 
 ```js
 ast.find(j.FunctionExpression)
@@ -167,7 +175,28 @@ ast.find(j.FunctionExpression)
   	})
 ```
 
-同时，对应 insertAfter 这个方法，还有一个 insertBefore。反正用起来都是很简单的。
+同时，对应 insertAfter 这个方法，还有一个 insertBefore。就是将节点插入到节点前面。
+
+### 删
+
+如果想删掉某个节点，则只需要 replaceWith 传入空值即可。
+
+```js
+// 删除
+j(path).replaceWith();
+```
+
+### 小技巧
+
+再说个小技巧，如果我们需要插入一大段代码，如果按照上面的写法，就得使用 jscodeshift 的 type 方法生成一个又一个节点对象。相当繁琐。那如何来偷懒呢？比如我要在某个 path 后面加一段 console 的代码：
+
+```js
+j(path).insertAfter(
+    j(`console.log('123123')`).find(j.ExpressionStatement).__paths[0].value
+)
+```
+
+也就是将代码转换成 ast 对象，然后再找到根节点插入到 path 后面。就可以了。
 
 ## 最后
 
