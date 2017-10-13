@@ -175,7 +175,6 @@ ast.find(j.FunctionExpression)
   	})
 ```
 
-同时，对应 insertAfter 这个方法，还有一个 insertBefore。就是将节点插入到节点前面。
 
 ### 删
 
