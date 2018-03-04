@@ -6,11 +6,13 @@
 
 ### 编译构建
 
-在构建方面，我是选择 node 端的 ts 代码，直接用 tsc 构建，而前端的 ts 代码，则用 webpack 打包。构建流程如下图所示，还是比较简单的。
+在构建方面，node 端的 ts 代码，我是直接用 tsc 构建，而前端的 ts 代码，则用 webpack 打包。构建流程如下图所示，还是比较简单的。
 
 ![](https://lh3.googleusercontent.com/-T9xVC1KNbhs/WpuSt3FKg9I/AAAAAAAAAEw/IUloQh0TFUsfI985sk8KQpo2vdaXVOrYwCHMYCw/I/15201398820871.jpg)
 
-node 端中，是直接将 js 代码编译到同个目录，然后为了在写代码时不受干扰，就在 vscode 的配置中，加了一段配置，将编译后的 js 文件隐藏掉：
+在 node 端中，是直接将 js 代码编译到同个目录，因此启动 ts 的 egg 应用就跟启动 js 差不多，因为结构是一致的，
+
+为了在写代码时不受干扰，可以在 vscode 的配置中加一段配置，将编译后的 js 文件隐藏掉：
 
 ```js
 "files.exclude": {
@@ -51,7 +53,7 @@ node 端中，是直接将 js 代码编译到同个目录，然后为了在写�
 
 ### 框架
 
-如果是直接使用 egg 的项目，就可以直接从 egg 中 import 相关类以及模块，不过很大一部分项目都是使用 egg 上层封装模块。
+如果是直接使用 egg 的项目，就可以直接从 egg 中 import 相关声明，不过很大一部分项目由于一些定制型的需求，都是会使用适合自己团队的 egg 上层封装模块。
 
 我们团队也有自己的一个 egg 上层封装的框架 larva，在 egg 上添加了一些额外的方法、中间件等，但是目前有支持 typescript 的就只有 egg。我希望我的业务代码能够直接从 larva 中将 egg 中暴露的 interface 给引入进来，也就是能够
 
@@ -83,7 +85,7 @@ export = Egg;
 
 最后再将 Egg 完整导出，就可以在 import 上层框架的时候，使用 egg 中的所有类和接口了。
 
-起初我是用 `export * from 'egg'` 的方式导出，但是后来发现这样会导致插件的声明文件就很难写了，没法做到通用。所以才使用 `export = ` 的方式来导出。
+起初我是用 `export * from 'egg'` 的方式导出，但是后来发现这样会导致插件的声明文件就很难写了，没法做到通用（因为没法同时合并到 egg 及上层框架中）。所以才使用 `export = ` 的方式来导出，这样的话，就还是基于 egg 的声明，在插件中写声明文件的时候也就可以只给 egg 拓展也能在使用第三方框架的项目中生效。
 
 基本上上层框架的声明文件都可以这么写，当然，如果有更好的写法也欢迎提出。
 
@@ -117,7 +119,7 @@ declare module 'egg' {
 
 当写完这个声明文件，并且觉得没什么问题了，就可以将该声明文件直接提个 PR 到插件库，合并并且发版之后，就把本地的声明文件删掉，再在 typings 中将插件 import 进来即可（因为 typescript 是通过 import 去加载模块的声明文件的）。
 
-如果是框架内置的插件，还可以在框架的 index.d.ts 中，直接将插件 import 进来
+如果是框架内置的插件，还可以在框架的声明文件中，直接将插件的声明 import 进来，在项目中就可以直接使用了。
 
 ```ts
 // larva/index.d.ts
@@ -136,7 +138,7 @@ export = Egg;
 
 ### Controller & Service
 
-egg 一个很方便的能力是自动挂载，通过 loader 将 controller、service 自动挂载到 Context 对象中，但是这个能力对于写 ts 来说又会带来一定问题，就是 ts 在做静态类型分析的时候，不知道这些模块会被自动加载，所以我们需要用 d.ts 来告诉 ts 这些模块被挂载到了相关对象中。
+egg 一个很方便的能力是自动挂载，可以通过 loader 将 controller、service 自动注入到 Context 对象中，但是这个能力对于写 ts 来说又会带来一定问题，就是 ts 在做静态类型分析的时候，不知道这些模块会被自动注入，所以我们需要用声明文件来告诉 ts 这些模块被挂载到了相关对象中。
 
 比如当我写一个 controller
 
@@ -173,11 +175,13 @@ declare module 'larva' {
 
 在 Service 中亦是如此。
 
-当然，由于这种 d.ts 是有规律的，只需要知道目录结构就能够生成这种 d.ts，所以完全可以通过工具来自动生成，我写了一个小工具：[egg-ts-helper](https://github.com/whxaxes/egg-ts-helper) 可以用来自动生成 controller、service、proxy 目录的 d.ts。
+当然，由于这种 d.ts 是有规律的，只需要知道目录结构就能够生成这种 d.ts，所以完全可以通过工具来自动生成，我写了一个小工具：[egg-ts-helper](https://github.com/whxaxes/egg-ts-helper) 可以用来自动生成 controller、service、proxy 目录的声明文件。
 
 ### Extend
 
-egg 还有一个很方便的能力就是自动拓展，在 extend 目录下能够很方便的拓展 egg 对象的方法。但是这些拓展的方法在 ts 中如何注入到 egg 对象中，并且在拓展的逻辑中能够得到相关代码提示呢？比如我要拓展 Context 对象。我是这么做的。
+egg 可以很方便的被拓展，只需要在 extend 目录下添加包含拓展方法的的代码文件即可。
+
+但是在 ts 中的话，这些拓展的方法如何注入到 egg 对象中，并且在拓展的逻辑中能够得到相关代码提示呢？比如我要拓展 Context 对象。我是这么做的。
 
 ```ts
 // app/extend/context.ts
@@ -222,7 +226,7 @@ Application 还有 Helper 等的拓展也一样。
 
 而像 middleware、config、unittest 这些，就跟 js 的编写方式类似。所以倒没什么可展开讲的，直接贴出示例代码。
 
-middleware
+Middleware
 
 ```ts
 // app/middleware/mymid.ts
@@ -238,7 +242,7 @@ export default () => {
 };
 ```
 
-config
+Config
 
 ```ts
 // app/config/config.default.ts
@@ -260,7 +264,7 @@ export default (appInfo: EggAppConfig) => {
 };
 ```
 
-unittest
+Unittest
 
 ```ts
 // test/app/controller/account.test.ts
@@ -285,7 +289,7 @@ describe('test/app/controller/account.test.js', () => {
 
 我们的前端是使用 Vue 来开发，而 Vue 2.5 以上对 typescript 的支持已经很好了，社区相关文档也蛮齐全。
 
-在我的项目中，就是直接用 [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator) 来写 vue 组件了。举个例子：
+在我的项目中，就是直接用 [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator) 提供的装饰器来写 vue 组件。举个例子：
 
 vue
 
@@ -329,7 +333,7 @@ export default class Home extends Vue {
 }
 ```
 
-我个人开发是喜欢将 ts 的逻辑抽离出来一个单独的文件 vm.ts，而且这样的话，当我在页面中想使用某个组件的实例的时候，可以使用类型指定的方式来达到代码提示的能力，比如：
+我个人是喜欢将 ts 的逻辑抽离出来一个单独的文件 vm.ts，而且这样的话，当我在页面中想使用某个组件的实例的时候，可以使用类型指定的方式来达到代码提示的能力，比如：
 
 ```ts
 // app/web/page/account/vm.ts
