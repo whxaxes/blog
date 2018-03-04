@@ -6,6 +6,7 @@
 
 ## 文章列表
 
+- [Typescript 在 Egg + Vue 应用中的实践](https://github.com/whxaxes/blog/issues/11)
 - [jscodeshift 简易教程](https://github.com/whxaxes/blog/issues/10)
 - [Node Inspector 代理实现](https://github.com/whxaxes/blog/issues/9)
 - [使用 electron 做个播放器](https://github.com/whxaxes/blog/issues/8)

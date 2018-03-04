@@ -362,3 +362,6 @@ export default class Account extends Vue {
 
 以上基本上就是此次在 egg 中使用 ts 的尝试经验了，以后应该会有更多的项目去尝试用 ts，如果有更好的想法会继续写一些文章进行分享。
 
+
+本文同步发布于：https://github.com/whxaxes/blog/issues/11
+
