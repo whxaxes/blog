@@ -220,6 +220,8 @@ const ctx = this as any as Context
 
 而给 egg 对象中注入的方式就有点不是很优雅了，得一个一个方法来写，这个目前是还没想到什么好的办法，唯一想到的就是跟 Controller 那个一样，通过工具来自动生成，不过这个就得做语法分析了。
 
+> [egg-ts-helper](https://github.com/whxaxes/egg-ts-helper) 最新版本已经支持 extend 下的代码的 d.ts 的自动生成了，通过 babylon 做 ts 语义分析.
+
 Application 还有 Helper 等的拓展也一样。
 
 ### Middleware & Config & Unittest
