@@ -187,16 +187,13 @@ egg 可以很方便的被拓展，只需要在 extend 目录下添加包含拓�
 // app/extend/context.ts
 
 const extendContext = {
-  get ctx(): Context {
-    return this as any as Context;
-  },
-
   get isProd(): boolean {
-    return this.ctx.app.config.env === 'prod';
+    const ctx = this as any as Context;
+    return ctx.app.config.env === 'prod';
   },
   
-  sfRequest(name) {
-    return this.ctx.app.sfclient.request(name);
+  sfRequest(this: Context, name) {
+    return this.app.sfclient.request(name);
   }
 };
 
@@ -210,13 +207,7 @@ declare module 'larva' {
 }
 ```
 
-因为不想每一个拓展方法中都去添加
-
-```ts
-const ctx = this as any as Context
-```
-
-所以就直接提供一个 ctx 的属性，因为对 ts 来说在这些方法中的 this 是属于 extendContext 对象，所以需要强制指定成 Context，而要强制指定，就得先把 this 转成 any，所以就用了 `this as any as Context` 。
+如果是方法，就直接用 ts 的 ThisType 来实现，否则就使用类型指定，将 this 指定为 Context。
 
 而给 egg 对象中注入的方式就有点不是很优雅了，得一个一个方法来写，这个目前是还没想到什么好的办法，唯一想到的就是跟 Controller 那个一样，通过工具来自动生成，不过这个就得做语法分析了。
 
