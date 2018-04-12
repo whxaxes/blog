@@ -6,7 +6,7 @@
 
 ## 文章列表
 
-- [Egg Ts 改造总结](https://github.com/whxaxes/blog/issues/12)
+- [Egg TS 改造总结](https://github.com/whxaxes/blog/issues/12)
 - [Typescript 在 Egg + Vue 应用中的实践](https://github.com/whxaxes/blog/issues/11)
 - [jscodeshift 简易教程](https://github.com/whxaxes/blog/issues/10)
 - [Node Inspector 代理实现](https://github.com/whxaxes/blog/issues/9)
