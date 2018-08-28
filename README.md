@@ -6,6 +6,7 @@
 
 ## 文章列表
 
+- [ts-node 错误堆栈问题排查小记](https://github.com/whxaxes/blog/issues/13)
 - [Egg TS 改造总结](https://github.com/whxaxes/blog/issues/12)
 - [Typescript 在 Egg + Vue 应用中的实践](https://github.com/whxaxes/blog/issues/11)
 - [jscodeshift 简易教程](https://github.com/whxaxes/blog/issues/10)
