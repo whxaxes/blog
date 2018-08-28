@@ -2,7 +2,7 @@
 
 ## 背景
 
-此前 egg 需要支持 ts，所以我们在 egg-bin 中集成了 ts-node （ 详见 [当 Egg 遇到 TypeScript，收获茶叶蛋一枚](当 Egg 遇到 TypeScript，收获茶叶蛋一枚) ），从而能够让开发者直接跑用 ts 写的 egg 应用，当然也包括单元测试。
+此前 egg 需要支持 ts，所以我们在 egg-bin 中集成了 ts-node （ 详见 [当 Egg 遇到 TypeScript，收获茶叶蛋一枚](https://zhuanlan.zhihu.com/p/35334932) ），从而能够让开发者直接跑用 ts 写的 egg 应用，当然也包括单元测试。
 
 但是实际在跑单测的时候却发现，`power-assert`（ [power-assert](https://github.com/power-assert-js/power-assert) 是个很酷的模块，也集成在了 egg-bin 中 ） 却在 ts-node 下失效了，查阅了一下文档发现要引入 [espower-typescript](https://github.com/power-assert-js/espower-typescript) 才能让 `power-assert` 在 ts-node 下生效，引入后发现 `power-assert` 正常了，但是却又有了另一个问题：
 
@@ -33,7 +33,8 @@ module.exports = function espowerSource (originalCode, filepath, options) {
     ...
     // 将 originalCode 加上 power-assert 的封装
     var instrumented = instrument(originalCode, filepath, espowerOptions);
-    // 获取 power-assert 封装后的 source map，即 js => power-asser + js 的 source map
+    // 获取 power-assert 封装后的 source map
+    // 即 js => power-assert + js 的 source map
     var outMap = convert.fromJSON(instrumented.map.toString());
     if (inMap) {
         // 合并两个 source map 并且返回
