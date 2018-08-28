@@ -2,15 +2,17 @@
 
 ## 背景
 
-此前在 egg-bin 中集成了 ts-node ，从而能够直接跑用 ts 写的 egg 应用，当然也包括单元测试。
+此前 egg 需要支持 ts，所以我们在 egg-bin 中集成了 ts-node （ 详见 [当 Egg 遇到 TypeScript，收获茶叶蛋一枚](当 Egg 遇到 TypeScript，收获茶叶蛋一枚) ），从而能够让开发者直接跑用 ts 写的 egg 应用，当然也包括单元测试。
 
-但是实际跑的时候却发现，`power-assert` 在 ts-node 下失效了，查阅了一下文档发现要引入 `espower-typescript` 才能让 `power-assert` 生效，引入后又发现错误堆栈的行数与列数不对了。
+但是实际在跑单测的时候却发现，`power-assert`（ [power-assert](https://github.com/power-assert-js/power-assert) 是个很酷的模块，也集成在了 egg-bin 中 ） 却在 ts-node 下失效了，查阅了一下文档发现要引入 [espower-typescript](https://github.com/power-assert-js/espower-typescript) 才能让 `power-assert` 在 ts-node 下生效，引入后发现 `power-assert` 正常了，但是却又有了另一个问题：
 
 ![](https://lh3.googleusercontent.com/-TKo0e1xjHjM/W4UWQ2SsI3I/AAAAAAAAAII/OniF3Bu-v2Qhsdt9cPXNTxnRY_B0a38hwCHMYCw/I/15354405535871.jpg)
 
 ![](https://lh3.googleusercontent.com/-DlXjxGK0nhc/W4UWQ-mp0qI/AAAAAAAAAIE/Cbfy-dBKx80xE3CALuLkw1NnvOdNbgdnQCHMYCw/I/15354405176504.jpg)
 
-可以看到，出错的行数应该是 5，但是实际上却成了 30 ，可是 `ts-node` 有内置 [source-map-support](https://github.com/evanw/node-source-map-support) ，应该是会自动纠正错误堆栈的行数才对的，为啥还会导致堆栈错误？
+可以看到，当单测出错的时候，错误堆栈中的出错的行数应该是 5，但是实际上却成了 30 ，列数也是一样不对的，可是 `ts-node` 有内置 [source-map-support](https://github.com/evanw/node-source-map-support) ，应该是会自动纠正错误堆栈的行数才对的，为啥还会导致堆栈错误？
+
+> 关于 source-map-support ，可以看一下这篇 [Node.js 中 source map 使用问题总结](https://zhuanlan.zhihu.com/p/26267678)
 
 强迫症表示这可不行啊，这必须得解决，于是开始了对源码的折腾...
 
