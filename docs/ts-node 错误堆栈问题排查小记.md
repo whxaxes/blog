@@ -18,7 +18,7 @@
 
 ### espower-typescript ?
 
-由于一旦引入 `espower-typescript` 之后就导致堆栈错误，而堆栈错误的原因一般都是 source-map 哪里出问题了，所以首先觉得应该是 `espower-typescript` 里的 source map 处理的问题。看了一下源码，发现里面引入了个 `espower-source` 的模块来处理 source-map 。所以我看了一下 `espower-source` 的源码。
+由于一旦引入 `espower-typescript` 之后就导致堆栈错误，移除又正常，再加上堆栈错误的原因一般都是 source-map 哪里出问题了，所以首先觉得应该是 `espower-typescript` 里的 source map 处理的问题。看了一下源码，发现里面引入了个 `espower-source` 的模块来处理 source-map 。所以我看了一下 `espower-source` 的源码。
 
 ```js
 // espower-source/index.js
