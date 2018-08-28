@@ -43,15 +43,13 @@ module.exports = function espowerSource (originalCode, filepath, options) {
 
 源码不复杂，可以看到 `espower-source` 中会先分析 compile 后的代码，然后从代码中提取出 sourcemap（ 比如 ts 编译成 js 后的 inlineSourceMap ），这个 sourcemap 是从 ts 到 js 的 sourcemap，然后再将编译后的代码做 power-assert 的封装（ 要实现 power-assert 的那种展示效果，是需要对代码做额外包装的 ），同时会生成一个新的 sourcemap ，这个就是从 js 到 封装后的 js 的 sourcemap。然后将两个 source map 合并成一个新的 sourcemap 并且返回。
 
-这咋看之下，逻辑没问题呀，按道理这个新的 sourcemap 应该是可以映射出封装后的 js 到 ts 的位置的。
-
-然后我将 `instrumented.code` 加了行号之后打印了出来
+这咋看之下，逻辑没问题呀，按道理这个新的 sourcemap 应该是可以映射出封装后的 js 到 ts 的位置的。紧接着我将 `instrumented.code` 加了行号之后打印了出来
 
 ![](https://lh3.googleusercontent.com/-dT7xl2KF_vM/W4UWRRcosgI/AAAAAAAAAIQ/1J-sGT_pWK8aU1iNiaJPhWHCgmq16_oJwCHMYCw/I/15354448095573.jpg)
 
 可以看到，前面截图中出错的行号正是这个封装后的 js 代码堆栈行号，也就是 sourcemap 是没有映射到 ts 上的。
 
-然后我就怀疑是不是合并生成的 sourcemap 是有问题的，于是又看了一下合并 sourcemap 的模块 [multi-stage-sourcemap](https://github.com/azu/multi-stage-sourcemap) 的代码逻辑，也没看出来问题，所以就决定，直接自己手动使用 [source-map](https://github.com/mozilla/source-map) 库来算来一下这个位置。
+那是不是合并生成的 sourcemap 是有问题的？抱着这个疑问我又看了一下用来合并 sourcemap 的模块 [multi-stage-sourcemap](https://github.com/azu/multi-stage-sourcemap) 的代码逻辑，也没看出来问题，那只能直接自己手动使用 [source-map](https://github.com/mozilla/source-map) 库来算来一下这个位置，看一下对不对了。
 
 于是在 `espowerSource` 的源码中手动加上了以下这段代码
 
@@ -66,7 +64,7 @@ const newPosition = consumer.originalPositionFor({
 console.info('>>>', newPosition);
 ```
 
-尝试使用 `source-map` 模块的 `Consumer` 来根据新的 sourcemap ，以及传入上面报错截图中的行数及列数，看下能否算出来正确的 ts 中的行数及列数。结果
+想通过使用 `source-map` 模块的 `Consumer` 来根据新的 sourcemap ，以及传入上面报错截图中的行数及列数，看下能否算出来正确的 ts 中的行数及列数。结果如下
 
 ![](https://lh3.googleusercontent.com/-WRymd18hxAQ/W4UWQ97vZ6I/AAAAAAAAAIM/jHozZjOyDLYtJHKKOvNkZZfZBavQpC37wCHMYCw/I/15354454815892.jpg)
 
@@ -74,7 +72,7 @@ console.info('>>>', newPosition);
 
 ### source-map-support ?
 
-然后又想到，既然锅不是 espower-typescript 的，那是不是出在 `source-map-support` 上，因为实际上做 sourcemap 映射的，是我们引入的 `source-map-support` 的模块。
+那既然锅不是 espower-typescript 的，难道是 `source-map-support` 的？毕竟实际上做 sourcemap 映射的，是我们引入的 `source-map-support` 的模块。
 
 然后又浏览了一下 source-map 的源码，发现 source-map-support 是通过 hook 掉 `Error.prepareStackTrace` 方法来实现在每次出错的时候，能够拿到错误堆栈，并且根据出错代码的 sourcemap 做行数及列数的矫正，于是根据这个代码找到了 source-map-support 中的 `mapSourcePosition` 方法，就是用于错误行数及列数矫正的。
 
