@@ -10,7 +10,9 @@
 
 ![](https://lh3.googleusercontent.com/-DlXjxGK0nhc/W4UWQ-mp0qI/AAAAAAAAAIE/Cbfy-dBKx80xE3CALuLkw1NnvOdNbgdnQCHMYCw/I/15354405176504.jpg)
 
-可以看到，出错的行数应该是 5，但是实际上却成了 30 ，强迫症表示这可不行啊，这必须得解决。
+可以看到，出错的行数应该是 5，但是实际上却成了 30 ，可是 `ts-node` 有内置 [source-map-support](https://github.com/evanw/node-source-map-support) ，应该是会自动纠正错误堆栈的行数才对的，为啥还会导致堆栈错误？
+
+强迫症表示这可不行啊，这必须得解决，于是开始了对源码的折腾...
 
 ## 分析
 
