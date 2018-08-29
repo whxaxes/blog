@@ -61,7 +61,7 @@ module.exports = function espowerSource (originalCode, filepath, options) {
 ```js
 const SourceMapConsumer = require('source-map').SourceMapConsumer;
 // 传入合并后的 sourcemap: reMap.sourcemap
-const consumer = SourceMapConsumer(reMap.sourcemap);
+const consumer = new SourceMapConsumer(reMap.sourcemap);
 const newPosition = consumer.originalPositionFor({
   line: 30,
   column: 15
