@@ -6,6 +6,7 @@
 
 ## 文章列表
 
+- [TS 中的内置类型简述](https://github.com/whxaxes/blog/issues/14)
 - [ts-node 错误堆栈问题排查小记](https://github.com/whxaxes/blog/issues/13)
 - [Egg TS 改造总结](https://github.com/whxaxes/blog/issues/12)
 - [Typescript 在 Egg + Vue 应用中的实践](https://github.com/whxaxes/blog/issues/11)
