@@ -7,7 +7,7 @@
 ts 中的实现
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 type Partial<T> = {
     [P in keyof T]?: T[P];
@@ -89,7 +89,7 @@ export type PowerPartial<T> = {
 ts 中的实现
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 type Required<T> = {
     [P in keyof T]-?: T[P];
@@ -101,7 +101,7 @@ type Required<T> = {
 其中 `-?` 是代表移除 `?` 这个 modifier 的标识。再拓展一下，除了可以应用于 `?` 这个 modifiers ，还有应用在 readonly ，比如 Readonly 这个类型
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 type Readonly<T> = {
     readonly [P in keyof T]: T[P];
@@ -115,7 +115,7 @@ type Readonly<T> = {
 ts 中的实现 
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 type Pick<T, K extends keyof T> = {
     [P in K]: T[P];
@@ -135,7 +135,7 @@ type NewPerson = Pick<Person, 'name'>; // { name: string; }
 ts 中的实现
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 type Record<K extends keyof any, T> = {
     [P in K]: T;
@@ -153,7 +153,7 @@ type T11 = Record<'a' | 'b' | 'c', Person>; // { a: Person; b: Person; c: Person
 ts 中的实现
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 type Exclude<T, U> = T extends U ? never : T;
 ```
@@ -234,7 +234,7 @@ interface NewChicken extends FilterPick<Chicken, 'name'> {
 ts 中的实现
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 type ReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) => infer R ? R : any;
 ```
@@ -256,7 +256,7 @@ type T01 = ReturnType<typeof TestFn>; // string
 ts 中的实现
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 interface ThisType<T> { }
 ```
@@ -293,7 +293,7 @@ const obj = {
 ts 中的实现
 
 ```typescript
-// node_modules/typescript/lib/lib.es6.d.ts
+// node_modules/typescript/lib/lib.es5.d.ts
 
 type NonNullable<T> = T extends null | undefined ? never : T;
 ```
