@@ -4,6 +4,7 @@
 
 ## 文章列表
 
+- [在 Egg 应用中抓包](https://github.com/whxaxes/blog/issues/15)
 - [TS 中的内置类型简述](https://github.com/whxaxes/blog/issues/14)
 - [ts-node 错误堆栈问题排查小记](https://github.com/whxaxes/blog/issues/13)
 - [Egg TS 改造总结](https://github.com/whxaxes/blog/issues/12)
