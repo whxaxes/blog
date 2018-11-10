@@ -28,7 +28,7 @@ $ http_proxy=http://127.0.0.1:8888 npm run dev
 
 从上面可以看到，不管是在开发期还是在服务器抓包，都有一些成本，再加上之前质量同学经常跟我吐槽，他们遇到问题的时候，想看到我们 node 到 java 服务器的请求。
 
-所以为了能够降低抓包的成本，能够在各个项目中 0 成本抓包，我将 whistle 集成到了 egg ，开发了个 [egg-whistle](https://github.com/whxaxes/egg-whistle) 插件。从而可以在本地，测试环境抓 node 到 jws 的 http 请求。
+所以为了能够降低抓包的成本，能够在各个项目中 0 成本抓包，我将 whistle 集成到了 egg ，开发了个 [egg-whistle](https://github.com/whxaxes/egg-whistle) 插件。从而可以在本地，测试环境抓 node 到 java 的 http 请求。
 
 ## 插件使用
 
@@ -154,4 +154,6 @@ exports.whistle = {
 
 ## 其他
 
-其他更多 dashboard 上的的使用方式可以直接看官方文档：http://wproxy.org/whistle/webui/
+其他更多 dashboard 上的的使用方式可以直接看官方文档：http://wproxy.org/whistle/webui/ 
+
+由于我们测试环境都是单实例，所以不考虑多实例的问题，因此该工具也不适合用于线上抓包，毕竟线上都是多实例的
