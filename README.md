@@ -19,3 +19,9 @@
 - [仿造slither.io第二步：加个地图，加点吃的](https://github.com/whxaxes/blog/issues/2)
 - [仿造slither.io第一步：先画条蛇](https://github.com/whxaxes/blog/issues/1)
 - [更多...](http://www.cnblogs.com/axes/)
+
+## 其他
+
+给女票写的 Node 入门教程，持续更新中
+
+http://wanghx.cn/blog/progressive 
