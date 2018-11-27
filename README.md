@@ -24,4 +24,4 @@
 
 给女票写的 Node 入门教程，持续更新中
 
-http://wanghx.cn/blog/progressive 
+https://wanghx.cn/blog/progressive 
