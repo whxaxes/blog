@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "**/public/": true,
+    "pack": true
+  },
+  "prettier.printWidth": 100
+}

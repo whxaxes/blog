@@ -1,0 +1,16 @@
+#time {
+  position: relative;
+  display: block;
+  font-weight: normal;
+  font-size: 14px;
+  height: 50px;
+  margin-top: 20px;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

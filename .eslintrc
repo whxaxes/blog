@@ -1,0 +1,16 @@
+{
+  "extends": "eslint-config-egg",
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-alert": "off",
+    "no-bitwise": "off"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  }
+}

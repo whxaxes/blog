@@ -1,0 +1,27 @@
+.content {
+  padding-top: 30px;
+  max-width: 1200px;
+}
+
+.copy-btn {
+  position: relative;
+  display: inline-block;
+  padding: 10px 5px;
+  color: #0366d6;
+  cursor: pointer;
+
+  &.success::after {
+    position: absolute;
+    content: 'copied';
+    display: block;
+    left: 100%;
+    padding-left: 5px;
+    height: 20px;
+    line-height: 20px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: #666;
+    font-size: 14px;
+  }
+}

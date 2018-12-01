@@ -1,0 +1,77 @@
+html,
+body {
+  font-family: 'PingFangSC-Light', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif, '黑体';
+  background: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.content {
+  max-width: 950px;
+  margin: auto;
+  padding: 0 10px;
+}
+
+body {
+  padding-bottom: 50px;
+}
+
+@font-face {
+  font-family: 'iconfont'; /* project id 942568 */
+  src: url('//at.alicdn.com/t/font_942568_ntw0eyrgzfe.eot');
+  src: url('//at.alicdn.com/t/font_942568_ntw0eyrgzfe.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_942568_ntw0eyrgzfe.woff') format('woff'),
+    url('//at.alicdn.com/t/font_942568_ntw0eyrgzfe.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_942568_ntw0eyrgzfe.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.github-corner {
+  svg {
+    z-index: 99;
+  }
+}
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+#cnzz_stat_icon_1275527222 {
+  visibility: hidden;
+}

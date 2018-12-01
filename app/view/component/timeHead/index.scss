@@ -1,0 +1,42 @@
+.title {
+  display: block;
+  max-width: 1050px;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding: 30px 0 10px 10px;
+  border-bottom: 1px solid #ddd;
+  margin: auto;
+
+  h1 {
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 1;
+    color: #444;
+    margin: auto;
+  }
+
+  .sub-title {
+    position: relative;
+    font-weight: normal;
+    font-size: 18px;
+    padding-left: 15px;
+
+    &::before {
+      position: absolute;
+      content: '';
+      display: block;
+      height: 18px;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      border-left: 1px solid #999;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sub-title {
+    display: none;
+  }
+}

@@ -1,0 +1,43 @@
+.dashboard {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+
+  // background: url('/public/images/70743629_p0.jpg') no-repeat center center;
+  // background-size: cover;
+
+  .dashboard-mid {
+    position: absolute;
+    max-width: 500px;
+    background: #fff;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: #333;
+    box-shadow: 0 0 10px #eee;
+    padding: 0 20px;
+
+    .intro {
+      word-break: normal;
+      text-align: center;
+    }
+
+    .panel-block {
+      // text-align: center;
+      font-size: 16px;
+
+      .panel-block-link {
+        line-height: 35px;
+      }
+    }
+
+    .panel-block-title {
+      border-color: #ddd;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.blog-title {
+  max-width: 1050px;
+  margin: auto;
+  padding: 40px 0 20px 0;
+  font-size: 18px;
+}
+
+.blog-list {
+  .item {
+    margin: 10px 0;
+    transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
+    transform: translate(-10px, 0);
+    opacity: 0;
+
+    a {
+      display: block;
+      padding: 14px 20px;
+      color: #333;
+      font-size: 18px;
+      max-width: 1000px;
+      margin: auto;
+      transition: transform 0.3s;
+    }
+
+    &.active {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+
+    .time {
+      color: #666;
+      font-size: 12px;
+      padding: 2px 5px;
+      background: #eee;
+      margin-left: 5px;
+      border-radius: 3px;
+      line-height: 1;
+      vertical-align: middle;
+      box-sizing: border-box;
+    }
+  }
+
+  .item:hover {
+    background-color: #f86143;
+
+    a {
+      color: #fff;
+      transform: translate(10px, 0);
+    }
+
+    .time {
+      color: #fff;
+      background: #f3bcb1;
+    }
+  }
+}

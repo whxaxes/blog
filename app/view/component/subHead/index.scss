@@ -1,0 +1,13 @@
+.title {
+  display: block;
+  border-bottom: 1px solid #ddd;
+
+  .title-inner {
+    max-width: 1050px;
+    text-decoration: none;
+    box-sizing: border-box;
+    padding: 20px 10px;
+    margin: auto;
+    font-size: 20px;
+  }
+}

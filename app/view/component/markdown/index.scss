@@ -1,0 +1,36 @@
+.markdown-body {
+  h1 {
+    line-height: 50px;
+    padding-bottom: 20px;
+  }
+
+  pre {
+    background: #282c34;
+
+    code {
+      color: #ccc;
+    }
+  }
+
+  a {
+    color: #f86143;
+
+    &::after {
+      content: '\e646';
+      padding-left: 2px;
+      font-family: 'iconfont' !important;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    &.img-link::after {
+      display: none;
+    }
+  }
+
+  img {
+    display: block;
+    margin: auto;
+  }
+}

@@ -1,0 +1,67 @@
+.my-info {
+  overflow: hidden;
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    margin: 30px auto 10px auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+    }
+  }
+
+  .user-name {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .intro {
+    margin: 10px 20px 0 20px;
+    text-align: justify;
+    word-break: break-all;
+    font-size: 13px;
+    line-height: 24px;
+    color: #666;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 4px;
+
+    a {
+      color: #f86143;
+    }
+  }
+
+  .panel-block {
+    color: #333;
+    margin: 50px 20px;
+    font-size: 14px;
+
+    .panel-block-title {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .panel-block-link {
+      display: block;
+      line-height: 30px;
+
+      .iconfont {
+        padding-right: 4px;
+      }
+    }
+
+    a {
+      transition: color 0.3s;
+
+      &:hover,
+      &.active {
+        color: #f86143;
+      }
+    }
+  }
+}
