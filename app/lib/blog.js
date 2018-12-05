@@ -16,14 +16,15 @@ module.exports = class Blog {
     this.loading = false;
     this.config = this.app.config.github;
     this.github = new Github(app);
-    this.githubDir = path.resolve(this.app.config.biz.docDir, './github');
+    this.docDir = this.app.config.biz.docDir;
+    this.githubDir = path.resolve(this.docDir, './github');
     this.githubInfoPath = path.resolve(this.githubDir, './info.json');
 
     // only sync in local
     if (app.config.env === 'local') {
       setTimeout(async () => {
         await this.syncMdMeta();
-        const watcher = chokidar.watch(this.app.config.biz.docDir);
+        const watcher = chokidar.watch(this.docDir);
         watcher
           .on('add', this.syncMdMeta.bind(this))
           .on('change', this.syncMdMeta.bind(this))
@@ -47,7 +48,7 @@ module.exports = class Blog {
     if (file && path.extname(file) === '.md') {
       files = [ file ];
     } else if (!file) {
-      files = await glob(path.resolve(this.app.config.biz.docDir, './**/*.md'));
+      files = await glob(path.resolve(this.docDir, './**/*.md'));
     }
 
     if (!files || !files.length) {
@@ -168,11 +169,15 @@ module.exports = class Blog {
         if (!title || isWIP || body.trim().length < 100) return null;
 
         // replace img url to remote
-        const newBody = body.replace(/\!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => {
-          src = path.join(
-            `//${this.app.config.github.webHost}${this.app.config.static.prefix}`,
-            utils.join(path.dirname(fileUrl), src).substring(this.app.config.biz.docDir.length)
-          );
+        const newBody = body.replace(/\!\[([^\]]*)\]\(([^)]+)\)/g, (all, alt, src) => {
+          if (utils.checkHttp(src)) {
+            return all;
+          }
+
+          const webHost = this.app.config.github.webHost;
+          const prefix = this.app.config.static.prefix;
+          src = `https://${webHost}${prefix}`
+            + utils.join(path.dirname(fileUrl), src).substring(this.docDir.length + 1);
 
           return `![${alt || ''}](${src})`;
         });
@@ -181,7 +186,9 @@ module.exports = class Blog {
         const issue = await this.github.issue(title, newBody, issueMeta.issueId);
         meta[name] = this.getMetaByIssue(issue);
         hasUpdate = true;
+        fs.writeFileSync(fileUrl, `# ${title}\n\n${newBody}`);
         this.logger.info(`update [${fileUrl}] to issue ${meta[name].issueId}`);
+
         return true;
       })
     );

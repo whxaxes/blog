@@ -24,10 +24,6 @@ module.exports = appInfo => {
     ignore: [],
   };
 
-  config.github = {
-    ...conf.github,
-  };
-
   config.logrotator = {
     maxDays: 7,
   };
@@ -59,6 +55,10 @@ module.exports = appInfo => {
 
   return {
     ...config,
+
+    github: {
+      ...conf.github,
+    },
 
     biz: {
       docDir: path.resolve(appInfo.baseDir, './docs'),
