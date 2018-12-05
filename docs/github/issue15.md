@@ -4,7 +4,7 @@
 
 为了解决这个问题，提升开发体验，在几个月前，我参与了 egg 支持 ts 的开发工作（ 戳：[当 Egg 遇到 TypeScript，收获茶叶蛋一枚](https://zhuanlan.zhihu.com/p/35334932) ），当时写了一个 [egg-ts-helper](https://github.com/whxaxes/egg-ts-helper) 的工具来自动生成 `d.ts` 并通过 TS 提供的 `Declaration Merging` 的能力将 loader 加载的模块合并到 egg 的声明当中。从而实现了 TS 项目中的 `IntelliSense` 。
 
-实现 TS 的 IntelliSense 之后，就开始考虑如何在 JS 项目中也能够跟 TS 项目一样能有智能提示，毕竟 Egg 的大部分项目都还是用 js 的，做了一些尝试之后，发现只要结合 `vscode` & `jsdoc` & `egg-ts-helper` 就能在 js 项目中也有跟 TS 项目中差不多的 IntelliSense 效果了：
+实现 TS 的 IntelliSense 之后，就开始考虑如何在 JS 项目中也能够跟 TS 项目一样能有智能提示，毕竟 Egg 的大部分项目都还是用 js 的，做了一些尝试之后，发现只要结合 `vscode` & `jsdoc` & `egg-ts-helper` 就能在 js 项目中也有跟 TS 项目中差不多的 IntelliSense 效果了，( github 中会裁剪动图，因此请点击[动图](https://wanghx.cn/public/github/images/issue15/img3.gif)以便看到全图 )：
 
 ![image](https://wanghx.cn/public/github/images/issue15/img3.gif)
 
