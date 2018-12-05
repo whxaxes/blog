@@ -1,15 +1,15 @@
 const path = require('path');
 const Github = require('./github');
-const { promisify } = require('util');
-const fs = require('fs');
+const fs = require('mz/fs');
 const assert = require('assert');
 const glob = require('fast-glob');
 const chokidar = require('chokidar');
 const utils = require('./utils');
-const writeFile = promisify(fs.writeFile);
-const readFile = promisify(fs.readFile);
 
 module.exports = class Blog {
+  /**
+   * @param {import('egg').Application} app
+   */
   constructor(app) {
     this.app = app;
     this.logger = app.logger;
@@ -63,8 +63,8 @@ module.exports = class Blog {
         const infoPath = path.resolve(dirname, 'info.json');
         infoCache[infoPath] =
           infoCache[infoPath] ||
-          (fs.existsSync(infoPath)
-            ? JSON.parse(fs.readFileSync(infoPath, { encoding: 'utf-8' }) || '{}')
+          ((fs.existsSync(infoPath))
+            ? JSON.parse((await fs.readFile(infoPath, { encoding: 'utf-8' })) || '{}')
             : {});
 
         const meta = (infoCache[infoPath].meta = infoCache[infoPath].meta || {});
@@ -73,7 +73,7 @@ module.exports = class Blog {
           meta[fileName] = meta[fileName] || {};
           const { isWIP } = await utils.getMdInfo(url);
           if (!isWIP && !meta[fileName].ctime) {
-            meta[fileName].ctime = +fs.statSync(url).mtime;
+            meta[fileName].ctime = +(await fs.stat(url)).mtime;
           } else if (isWIP && meta[fileName].ctime) {
             delete meta[fileName].ctime;
           } else {
@@ -91,7 +91,7 @@ module.exports = class Blog {
 
     await Object.keys(needUpdate).map(p => {
       this.logger.info('update info ' + p);
-      return writeFile(p, JSON.stringify(infoCache[p], null, 2));
+      return fs.writeFile(p, JSON.stringify(infoCache[p], null, 2));
     });
   }
 
@@ -114,12 +114,12 @@ module.exports = class Blog {
         const mdBody = issue.body;
         const mdContent = `# ${mdTitle}\n${mdBody}`;
         const fileName = `issue${index + 1}`;
-        await writeFile(path.resolve(this.githubDir, `./${fileName}.md`), mdContent);
+        await fs.writeFile(path.resolve(this.githubDir, `./${fileName}.md`), mdContent);
         docInfo.meta[fileName] = this.getMetaByIssue(issue);
       })
     );
 
-    await writeFile(this.githubInfoPath, JSON.stringify(docInfo, null, 2));
+    await fs.writeFile(this.githubInfoPath, JSON.stringify(docInfo, null, 2));
 
     this.logger.info(
       `sync success, sync count ${myIssueList.length}, sync time ${Date.now() - startTime}ms`
@@ -140,7 +140,7 @@ module.exports = class Blog {
   async syncIssueToRemote() {
     let docInfo;
     try {
-      docInfo = JSON.parse(await readFile(this.githubInfoPath, { encoding: 'utf-8' }));
+      docInfo = JSON.parse(await fs.readFile(this.githubInfoPath, { encoding: 'utf-8' }));
       assert(!!docInfo.meta, 'meta 为空');
     } catch (e) {
       this.syncIssueToLocal();
@@ -187,7 +187,7 @@ module.exports = class Blog {
     );
 
     if (hasUpdate) {
-      await writeFile(this.githubInfoPath, JSON.stringify(docInfo, null, 2));
+      await fs.writeFile(this.githubInfoPath, JSON.stringify(docInfo, null, 2));
     }
   }
 

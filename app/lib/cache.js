@@ -1,5 +1,5 @@
 const { EventEmitter } = require('events');
-const fs = require('fs');
+const fs = require('mz/fs');
 
 class FileCache extends EventEmitter {
   constructor(options = {}) {

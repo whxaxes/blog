@@ -1,8 +1,6 @@
 const path = require('path');
-const fs = require('fs');
-const { promisify } = require('util');
+const fs = require('mz/fs');
 const { Controller } = require('egg');
-const readFile = promisify(fs.readFile);
 
 class ProgressiveController extends Controller {
   async index() {
@@ -70,7 +68,7 @@ class ProgressiveController extends Controller {
 
     await this.ctx.render('blog/code', {
       lang,
-      code: await readFile(fileUrl, { encoding: 'utf-8' }),
+      code: await fs.readFile(fileUrl, { encoding: 'utf-8' }),
     });
   }
 }

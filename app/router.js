@@ -1,13 +1,15 @@
-
-
+/**
+ * @param {import('egg').Application} app egg app
+ */
 module.exports = app => {
+  const { controller, router } = app;
+
   // home
-  app.post('/sync', 'home.sync');
-  // app.post('/sync/local', 'home.syncLocal');
+  router.post('/sync', controller.home.sync);
 
   // blog
-  app.get('/', 'blog.index');
-  app.get('/blog', 'blog.dashboard');
-  app.get('/blog/code', 'blog.code');
-  app.get('/blog/*', 'blog.index');
+  router.get('/', controller.blog.index);
+  router.get('/blog', controller.blog.dashboard);
+  router.get('/blog/code', controller.blog.code);
+  router.get('/blog/*', controller.blog.index);
 };

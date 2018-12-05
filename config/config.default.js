@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const conf = require('../conf');
 
+/**
+ * @param {import('egg').EggAppInfo} appInfo
+ */
 module.exports = appInfo => {
   const config = (exports = {});
   const cacheDir = path.resolve(__dirname, '../.cache');
@@ -45,15 +48,6 @@ module.exports = appInfo => {
     ...conf.whistleConfig,
   };
 
-  config.biz = {
-    docDir: path.resolve(appInfo.baseDir, './docs'),
-    docPrefix: '/blog/',
-    docForwardUrl: {
-      '/': '/blog/github',
-    },
-    startTime: '2018-04-06 02:30:00',
-  };
-
   config.static = {
     prefix: '/public/',
     dir: [
@@ -63,5 +57,16 @@ module.exports = appInfo => {
     filter: file => file.match(/\.(png|jpe?g|eot|ttf|svg)$/i),
   };
 
-  return config;
+  return {
+    ...config,
+
+    biz: {
+      docDir: path.resolve(appInfo.baseDir, './docs'),
+      docPrefix: '/blog/',
+      docForwardUrl: {
+        '/': '/blog/github',
+      },
+      startTime: '2018-04-06 02:30:00',
+    },
+  };
 };
