@@ -6,9 +6,9 @@
 
 但是实际在跑单测的时候却发现，`power-assert`（ [power-assert](https://github.com/power-assert-js/power-assert) 是个很酷的模块，也集成在了 egg-bin 中 ） 却在 ts-node 下失效了，查阅了一下文档发现要引入 [espower-typescript](https://github.com/power-assert-js/espower-typescript) 才能让 `power-assert` 在 ts-node 下生效，引入后发现 `power-assert` 正常了，但是却又有了另一个问题：
 
-![](https://lh3.googleusercontent.com/-TKo0e1xjHjM/W4UWQ2SsI3I/AAAAAAAAAII/OniF3Bu-v2Qhsdt9cPXNTxnRY_B0a38hwCHMYCw/I/15354405535871.jpg)
+![image](https://wanghx.cn/public/github/images/issue12/15354405535871.jpg)
 
-![](https://lh3.googleusercontent.com/-DlXjxGK0nhc/W4UWQ-mp0qI/AAAAAAAAAIE/Cbfy-dBKx80xE3CALuLkw1NnvOdNbgdnQCHMYCw/I/15354405176504.jpg)
+![image](https://wanghx.cn/public/github/images/issue12/15354405176504.jpg)
 
 可以看到，当单测出错的时候，错误堆栈中的出错的行数应该是 5，但是实际上却成了 30 ，列数也是一样不对的，可是 `ts-node` 有内置 [source-map-support](https://github.com/evanw/node-source-map-support) ，应该是会自动纠正错误堆栈的行数才对的，为啥还会导致堆栈错误？
 
@@ -50,7 +50,7 @@ module.exports = function espowerSource (originalCode, filepath, options) {
 
 这咋看之下，逻辑没问题呀，按道理这个新的 sourcemap 应该是可以映射出封装后的 js 到 ts 的位置的。紧接着我将 `instrumented.code` 加了行号之后打印了出来
 
-![](https://lh3.googleusercontent.com/-dT7xl2KF_vM/W4UWRRcosgI/AAAAAAAAAIQ/1J-sGT_pWK8aU1iNiaJPhWHCgmq16_oJwCHMYCw/I/15354448095573.jpg)
+![image](https://wanghx.cn/public/github/images/issue12/15354448095573.jpg)
 
 可以看到，前面截图中出错的行号正是这个封装后的 js 代码堆栈行号，也就是 sourcemap 是没有映射到 ts 上的。
 
@@ -71,7 +71,7 @@ console.info('>>>', newPosition);
 
 想通过使用 `source-map` 模块的 `Consumer` 来根据新的 sourcemap ，以及传入上面报错截图中的行数及列数，看下能否算出来正确的 ts 中的行数及列数。结果如下
 
-![](https://lh3.googleusercontent.com/-WRymd18hxAQ/W4UWQ97vZ6I/AAAAAAAAAIM/jHozZjOyDLYtJHKKOvNkZZfZBavQpC37wCHMYCw/I/15354454815892.jpg)
+![image](https://wanghx.cn/public/github/images/issue12/15354454815892.jpg)
 
 嗯...结果是对的，锅貌似不在 espower-typescript 呀？
 
