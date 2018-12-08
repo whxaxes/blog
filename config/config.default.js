@@ -66,7 +66,7 @@ module.exports = appInfo => {
       docForwardUrl: {
         '/': '/blog/github',
       },
-      startTime: '2018-04-06 02:30:00',
+      startTime: new Date('2018-04-06 02:30:00'),
     },
   };
 };

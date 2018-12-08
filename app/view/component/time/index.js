@@ -297,7 +297,7 @@ function initTime(fontSize, numWidth, numHeight, lineWidth) {
         }
 
         var val = numStr[j];
-        var map = timeMap[+val];
+        var map = timeMap[val];
         for (var k = 0; k < map.length; k++) {
           var val = map[k];
           var line = lines[k];
