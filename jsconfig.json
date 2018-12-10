@@ -1,5 +1,14 @@
 {
   "include": [
     "**/*"
+  ],
+  "exclude": [
+    "node_modules/",
+    "app/web/",
+    "app/view/",
+    "public/",
+    "app/mocks/",
+    "coverage/",
+    "logs/"
   ]
 }
