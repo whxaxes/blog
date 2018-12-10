@@ -47,7 +47,7 @@ declare module 'egg' {
 
 这个 `jsconfig.json` 跟 `tsconfig.json` 类似，具体可以看[官方文档描述](https://code.visualstudio.com/docs/languages/javascript#_javascript-projects-jsconfigjson)，创建好这个文件并且 include `**/*` 之后，就会去加载 egg-ts-helper 生成的 d.ts 了。
 
-上面这个 `jsconfig` 有个需要注意的点，如果打开 vscode ，vscode 提醒 `Configure Excludes` 的话，就需要配置一下 `exclude`，因为 include 的文件超过一千个的话，vscode 就会提醒让配置 `exclude`，比如我这边负责的项目，前端构建多次又没有去清目录的话，轻轻松松文件数就破千了。我这边的 `exclude` 配置如下，可以参考一二
+上面这个 `jsconfig` 有个需要注意的点，如果打开 vscode ，vscode 提醒 `Configure Excludes` 的话，就需要配置一下 `exclude`，因为 include 的文件超过一千个的话，vscode 就会提醒让配置 `exclude`，如果不配置的话 vscode 就不会去处理 `d.ts` 的文件了，比如我这边负责的项目，前端构建多次又没有去清目录的话，轻轻松松文件数就破千了。我这边的 `exclude` 配置如下，可以参考一二
 
 ```json
 {
@@ -66,7 +66,7 @@ declare module 'egg' {
 }
 ```
 
-完成这一步之后，你就会发现，在 controller 这些用类的形式来写的模块中就已经可以拿到代码提示了。
+完成这些配置之后，你就会发现，在 controller 这些用类的形式来写的模块中就已经可以拿到代码提示了。
 
 ![image](https://wanghx.cn/public/github/images/issue15/img1.png)
 
