@@ -139,8 +139,56 @@ module.exports = appInfo => {
 };
 ```
 
-上面 biz 是在最后才写到返回对象中，是为了将这种自定义类型合并到 egg 的 `EggAppConfig` 中
+上面 biz 是在最后才写到返回对象中，是为了将这种自定义类型合并到 egg 的 `EggAppConfig` 中。
+
+## 集成到项目
+
+安装 `egg-ts-helper`
+
+```bash
+$ npm install egg-ts-helper --save-dev
+```
+
+添加 `jsconfig.json` 文件
+
+```json
+{
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "node_modules/",
+    "app/web/",
+    "app/view/",
+    "public/"
+  ]
+}
+```
+
+更改 egg-bin dev 的运行指令
+
+```json
+{
+  ...
+  "dev": "egg-bin dev -r egg-ts-helper/register",
+  ...
+}
+```
+
+执行 `dev`
+
+```bash
+$ npm run dev
+```
+
+当看到有 `[egg-ts-helper] xxx created` 的日志后，就说明声明已经生成好了，用 vscode 打开项目即可获得代码提示，在 `router.js` 这些需要按照上面描述的加一下 `jsdoc` 就行了。
+
+如果有用到 custom loader，可以看一下 [egg-ts-helper#Extend](https://github.com/whxaxes/egg-ts-helper#extend) 配置，再或者直接参考下面这个 demo 。
+
+https://github.com/whxaxes/egg-boilerplate-d-js 
+
+有兴趣的可以 clone 过去自行尝试一二。
 
 ## 最后
 
-写了个在 js 中使用 IntelliSense 的 demo ： https://github.com/whxaxes/egg-boilerplate-d-js ，有兴趣的可以自行尝试一二。
+要集成该代码提示功能需要具备一些 typescript 的知识基础，可以阅读一下 `egg-ts-helper` 生成的声明文件，知道类型是如何合并的，会更好的帮助你们获得更优异的开发体验，有相关问题可以直接到 `egg-ts-helper` 项目下提 issue ，我会尽快回复。
