@@ -9,3 +9,5 @@ run/
 .cache/
 conf.js
 yarn.lock
+typings/
+.vscode/
