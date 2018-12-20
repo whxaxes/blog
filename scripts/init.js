@@ -44,7 +44,7 @@ if (!fs.existsSync(configPath)) {
 }
 
 // create typings
-shell.exec('ets');
+shell.exec('node ' + require.resolve('egg-ts-helper/dist/bin'));
 
 // init completed
 console.info('init completed');

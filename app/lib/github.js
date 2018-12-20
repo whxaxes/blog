@@ -1,7 +1,6 @@
 
 
 const moment = require('moment');
-const formstream = require('formstream');
 
 module.exports = class Github {
   constructor(app) {
@@ -19,21 +18,6 @@ module.exports = class Github {
 
   get repo() {
     return `repos/${this.config.name}/${this.config.repo}`;
-  }
-
-  sub(isSubscribe = true) {
-    const form = formstream();
-    form
-      .field('hub.mode', `${isSubscribe ? 'subscribe' : 'unsubscribe'}`)
-      .field('hub.topic', `https://github.com/${this.config.name}/${this.config.repo}/events/push`)
-      .field('hub.callback', `https://${this.config.webHost}/sync`);
-
-    return this.app.curl('https://api.github.com/hub', {
-      method: 'POST',
-      auth: `${this.config.name}:${this.config.token}`,
-      headers: form.headers(),
-      stream: form,
-    });
   }
 
   request(url, option) {
