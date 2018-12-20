@@ -1,6 +1,6 @@
 # blog
 
-偶尔写写。若有不当，欢迎指出，但请勿喷，订阅请 watch 
+偶尔写写。若有不当，欢迎指出，但请勿喷，订阅请 watch
 
 ## 文章列表
 
@@ -19,10 +19,5 @@
 - [说说如何实现一个模板引擎](https://github.com/whxaxes/blog/issues/4)
 - [仿造slither.io第二步：加个地图，加点吃的](https://github.com/whxaxes/blog/issues/2)
 - [仿造slither.io第一步：先画条蛇](https://github.com/whxaxes/blog/issues/1)
-- [更多...](http://www.cnblogs.com/axes/)
+- [更多...](https://wanghx.cn/blog)
 
-## 其他
-
-给女票写的 Node 入门教程，持续更新中
-
-https://wanghx.cn/blog/progressive 

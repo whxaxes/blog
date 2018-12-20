@@ -59,7 +59,6 @@
     "cov": "egg-bin cov",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
-    "autod": "autod",
     "pack": "node ./scripts/pack",
     "update": "node ./scripts/pack --cmd restart",
     "update-nginx": "env ONLY_NGINX=1 node ./scripts/pack --cmd restart --skip-deps",
