@@ -21,3 +21,7 @@
 - [仿造slither.io第一步：先画条蛇](https://github.com/whxaxes/blog/issues/1)
 - [更多...](https://wanghx.cn/blog)
 
+## 关于代码
+
+该项目里的代码就是我网站的代码，基于模板引擎的前端工程化，仅供参考，估计不能复用...
+

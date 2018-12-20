@@ -47,7 +47,7 @@
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
     "start": "egg-scripts start --daemon",
@@ -55,9 +55,10 @@
     "dev": "egg-bin dev -r egg-ts-helper/register",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
-    "test-local": "egg-bin test",
-    "cov": "egg-bin cov",
+    "test-local": "jest",
+    "cov": "npm run test-local -- --coverage",
     "lint": "eslint .",
+    "init": "node ./scripts/init",
     "ci": "npm run lint && npm run cov",
     "pack": "node ./scripts/pack",
     "update": "node ./scripts/pack --cmd restart",
@@ -67,7 +68,7 @@
     "restart": "node ./scripts/restart"
   },
   "ci": {
-    "version": "6, 8"
+    "version": "8, 10"
   },
   "repository": {
     "type": "git",
