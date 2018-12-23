@@ -1,4 +1,5 @@
 const Blog = require('../lib/blog');
+const { watch } = require('./application');
 const BLOG_SYMBOL = Symbol('Agent#blog');
 
 module.exports = {
@@ -12,4 +13,6 @@ module.exports = {
 
     return this[BLOG_SYMBOL];
   },
+
+  watch,
 };

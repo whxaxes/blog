@@ -1,7 +1,6 @@
 const WebSocket = require('ws');
 const url = require('url');
 const path = require('path');
-const chokidar = require('chokidar');
 const manifest = {};
 
 /**
@@ -9,20 +8,17 @@ const manifest = {};
  */
 module.exports = app => {
   app.hmrInstalled = true;
-  app.messenger.on('egg-ready', () => {
+  app.messenger.once('egg-ready', () => {
     const server = app.server;
-    const wsList = [];
     const wss = new WebSocket.Server({ noServer: true });
-    const watcher = chokidar.watch([
+    const wsList = [];
+    const watcher = app.watch([
       app.mus.baseDir,
       app.config.biz.docDir,
     ]);
 
-    // listen app.close event
-    app.on('close', () => {
-      watcher.close();
-      wsList.length = 0;
-    });
+    // close wss
+    app.once('close', () => wss.close());
 
     watcher.on('change', async changePath => {
       const reqUrls = manifest[changePath] || [];
@@ -58,6 +54,10 @@ module.exports = app => {
         }
       });
     });
+
+    if (!server) {
+      return;
+    }
 
     server.on('upgrade', (req, socket, head) => {
       const pathname = url.parse(req.url).pathname;

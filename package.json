@@ -36,6 +36,7 @@
   "devDependencies": {
     "autod": "^2.9.0",
     "autod-egg": "^1.0.0",
+    "co-sleep": "^0.0.1",
     "egg-bin": "^4.3.0",
     "egg-mock": "^3.12.0",
     "egg-ts-helper": "1.19.2",
@@ -55,7 +56,7 @@
     "dev": "egg-bin dev -r egg-ts-helper/register",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
-    "test-local": "jest -i --verbose",
+    "test-local": "jest -i --forceExit --detectOpenHandles",
     "cov": "npm run test-local -- --coverage",
     "lint": "eslint .",
     "init": "node ./scripts/init",

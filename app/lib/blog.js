@@ -3,7 +3,6 @@ const Github = require('./github');
 const fs = require('mz/fs');
 const assert = require('assert');
 const glob = require('fast-glob');
-const chokidar = require('chokidar');
 const utils = require('./utils');
 
 module.exports = class Blog {
@@ -22,14 +21,11 @@ module.exports = class Blog {
 
     // only sync in local
     if (app.config.env === 'local') {
-      setTimeout(async () => {
-        await this.syncMdMeta();
-        const watcher = chokidar.watch(this.docDir);
-        watcher
-          .on('add', this.syncMdMeta.bind(this))
-          .on('change', this.syncMdMeta.bind(this))
-          .on('unlink', this.syncMdMeta.bind(this));
-      }, 100);
+      this.syncMdMeta();
+      app.watch(this.docDir)
+        .on('add', this.syncMdMeta.bind(this))
+        .on('change', this.syncMdMeta.bind(this))
+        .on('unlink', this.syncMdMeta.bind(this));
     }
   }
 

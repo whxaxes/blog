@@ -1,22 +1,25 @@
 const request = require('supertest');
-let server;
 
-beforeAll(() => {
-  server = require('../httptest.1');
-});
+describe('progressive/demo/httptest.1.js', () => {
+  let server;
 
-afterAll(() => {
-  server.close();
-});
+  beforeAll(() => {
+    server = require('../httptest.1');
+  });
 
-test('should visit / without error', async () => {
-  await request(server)
-    .get('/')
-    .expect(/hello nodejs/);
-});
+  afterAll(() => {
+    server.close();
+  });
 
-test('should visit /whx without error', async () => {
-  await request(server)
-    .get('/whx')
-    .expect(/hello whx/);
+  it('should visit / without error', async () => {
+    await request(server)
+      .get('/')
+      .expect(/hello nodejs/);
+  });
+
+  it('should visit /whx without error', async () => {
+    await request(server)
+      .get('/whx')
+      .expect(/hello whx/);
+  });
 });
