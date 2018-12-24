@@ -6,7 +6,7 @@
   <div class="user-name">whxaxes</div>
 
   <div class="intro">
-    花名：吖猩，前端，目前就职于阿里游戏，专注于 Web 开发。
+    花名：吖猩，前端，目前就职于阿里巴巴，专注于 Web 开发。
   </div>
 
   <div class="panel-block">
