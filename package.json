@@ -57,7 +57,7 @@
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "jest -i --forceExit --detectOpenHandles",
-    "cov": "npm run test-local -- --coverage",
+    "cov": "npm run test-local -- --coverage --silent",
     "lint": "eslint .",
     "init": "node ./scripts/init",
     "ci": "npm run lint && npm run cov",
