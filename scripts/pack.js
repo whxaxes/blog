@@ -24,6 +24,7 @@ miss.pipe(
       .src([
         '**/*',
         '!node_modules/**/*',
+        '!coverage/**/*',
         '!run/**/*',
         '!logs/**/*',
         '!.cache/**/*',

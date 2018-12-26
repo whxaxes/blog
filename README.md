@@ -1,5 +1,15 @@
 # blog
 
+[![Company][company-image]](https://wanghx.cn/)
+[![GF][gf-image]](https://wanghx.cn/)
+[![Money][money-image]](https://wanghx.cn/)
+[![Easter Egg][easter-image]](https://wanghx.cn/)
+
+[company-image]: https://img.shields.io/badge/company-alibaba-brightgreen.svg?style=flat-square
+[gf-image]: https://img.shields.io/badge/girl%20friend-1-brightgreen.svg?style=flat-square
+[money-image]: https://img.shields.io/badge/money-none-red.svg?style=flat-square
+[easter-image]: https://img.shields.io/badge/easter%20egg-1-brightgreen.svg?style=flat-square
+
 偶尔写写。若有不当，欢迎指出，但请勿喷，订阅请 watch
 
 ## 文章列表
