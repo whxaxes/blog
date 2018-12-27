@@ -1,10 +1,12 @@
 # blog
 
+[![Work][work-image]](https://wanghx.cn/)
 [![Company][company-image]](https://wanghx.cn/)
 [![GF][gf-image]](https://wanghx.cn/)
 [![Money][money-image]](https://wanghx.cn/)
 [![Easter Egg][easter-image]](https://wanghx.cn/)
 
+[work-image]: https://img.shields.io/badge/work-frontend-brightgreen.svg?style=flat-square
 [company-image]: https://img.shields.io/badge/company-alibaba-brightgreen.svg?style=flat-square
 [gf-image]: https://img.shields.io/badge/girl%20friend-1-brightgreen.svg?style=flat-square
 [money-image]: https://img.shields.io/badge/money-none-red.svg?style=flat-square
