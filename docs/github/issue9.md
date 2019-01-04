@@ -197,6 +197,12 @@ j(path).insertAfter(
 
 也就是将代码转换成 ast 对象，然后再找到根节点插入到 path 后面。就可以了。
 
+> 据网友提醒，在最新的 jscodeshift 版本中，已经可以可以通过以下代码实现上面的功能
+
+```js
+j(path).insertAfter(`console.log('123123')`)
+```
+
 ## 最后
 
 上面说的 `find`、`forEach`、`replaceWith`、`insertAfter`、`insertBefore` 方法都是比较常用，除此之外还有 `filter`、`get` 等方法，具体有哪些方法可以直接看 jscodeshift 的 collection [源码](https://github.com/facebook/jscodeshift/blob/master/src/Collection.js)。个人觉得直接看源码比看文档简单多了。
