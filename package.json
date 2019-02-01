@@ -39,7 +39,7 @@
     "co-sleep": "^0.0.1",
     "egg-bin": "^4.3.0",
     "egg-mock": "^3.12.0",
-    "egg-ts-helper": "1.19.2",
+    "egg-ts-helper": "^1.21.0",
     "eslint": "^4.7.0",
     "eslint-config-egg": "^5.1.0",
     "jest": "^23.6.0",
@@ -53,7 +53,7 @@
   "scripts": {
     "start": "egg-scripts start --daemon",
     "stop": "egg-scripts stop",
-    "dev": "egg-bin dev -r egg-ts-helper/register",
+    "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "jest -i --forceExit --detectOpenHandles",
@@ -76,5 +76,10 @@
     "url": ""
   },
   "author": "wanghx",
-  "license": "MIT"
+  "license": "MIT",
+  "egg": {
+    "require": [
+      "egg-ts-helper/register"
+    ]
+  }
 }

@@ -95,7 +95,13 @@ module.exports = app => {
 @param {import('egg').Application} app
 ```
 
-然后也可以获得代码提示
+**注意**：如果使用了最新版本的 egg-ts-helper ，会自动生成一个声明文件将 egg 注册到一个名为 Egg 的全局 namespace 中，就可以不使用 `import` ，而是直接使用 Egg 来拿类型即可。
+
+```
+@param {Egg.Application} app
+```
+
+添加 jsdoc 之后就获得代码提示了
 
 ![image](https://wanghx.cn/public/github/images/issue15/img2.png)
 

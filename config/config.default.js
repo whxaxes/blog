@@ -5,7 +5,7 @@ const path = require('path');
 const conf = require('../conf');
 
 /**
- * @param {import('egg').EggAppInfo} appInfo
+ * @param {Egg.EggAppInfo} appInfo
  */
 module.exports = appInfo => {
   const config = (exports = {});
