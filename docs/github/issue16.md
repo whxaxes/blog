@@ -198,7 +198,7 @@ const result = add('test').add('bbb').add('asda').add('ddd').add('kkk');
 
 再看一下 result 的类型
 
-![image](./images/img1.png)
+![image](https://wanghx.cn/public/github/images/issue16/img1.png)
 
 可以看到 result 的类型中加上了前面 add 的所有 key 值。
 
