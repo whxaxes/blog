@@ -29,7 +29,7 @@ type --> [type utils] --> newType
 type PlainObject<T> = { [key: string]: T }
 ```
 
-泛型还可以要求必须是某个类型的子类型，或者给个默认类型（ 相当于默认值 ）。比如上面那个就是
+泛型还可以要求必须是某个类型的兼容类型，或者给个默认类型（ 相当于默认值 ）。比如上面那个就是
 
 ```typescript
 type PlainObject<T extends string = string> = { [key: string]: T }
@@ -104,7 +104,7 @@ Conditional Type 很简单，就是条件表达式
 type Foo<T> = T extends string ? number : boolean;
 ```
 
-这段代码的意思就是，如果 T 类型是 string 的子类型，那么返回 number 类型，否则返回 boolean 类型。
+这段代码的意思就是，如果 T 类型是 string 的兼容类型，那么返回 number 类型，否则返回 boolean 类型。
 
 而当 Conditional Type 跟 Type inference 的结合的时候才是真正的强大，能够推断出某个类型中的类型，比如我们很常用的 `ReturnType`，就能够获取到函数的返回类型，而 ReturnType 的实现也很简单：
 
@@ -112,7 +112,7 @@ type Foo<T> = T extends string ? number : boolean;
 type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
 ```
 
-这段代码的意思是，如果 T 类型是函数的子类型，那么 infer R ，这个 `infer R` 代表的是推断这个函数的返回类型为 R 并且返回。比如在下面代码中
+这段代码的意思是，如果 T 类型是函数的兼容类型，那么 infer R ，这个 `infer R` 代表的是推断这个函数的返回类型为 R 并且返回。比如在下面代码中
 
 ```typescript
 type fn = (abc: string) => number;
